@@ -24,13 +24,9 @@ typedef struct db_s {
     char registeredAt[16];
 }db_t;
 
-bool INSERT_INTO(list_t **head, db_t **db);
-bool add_elements_to_database(list_t **head, db_t **db);
-
-
 /* Init */
 void assign_value(db_t **db, char **getline);
-void print_value(db_t *db);
+void print_brut_value(db_t *db);
 
 
 /* Loop */
@@ -39,6 +35,9 @@ bool main_loop(list_t **head, db_t **db);
 /* Utils */
 void free_getline(char **getline);
 
+/* Operation */
+void print_table(db_t *db);
+bool INSERT_INTO(list_t **head, db_t **db);
 
 
 static bool (*operation[])(list_t **, db_t **) = {

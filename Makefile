@@ -5,10 +5,15 @@
 ## Makefile
 ##
 
+OPERATION	=	src/operation/print_table.c	\
+				src/operation/insert_data.c	\
+				src/operation/delete_data.c	\
+
 SRC	=	src/main.c	\
 		src/my_db.c	\
 		src/assign_value.c	\
 		src/utils.c	\
+		$(OPERATION)	\
 
 LIB =	lib/my_lib.c	\
 		lib/list.c	\
@@ -29,7 +34,7 @@ LDFLAGS	=	-lm
 
 all:	$(NAME)
 $(NAME):	$(OBJ)
-	$(CC) -o $(NAME) $(DEBUG) $(CFLAGS) $(SRC) $(LIB) $(LDFLAGS)
+	$(CC) -o $(NAME) $(CFLAGS) $(SRC) $(LIB) $(LDFLAGS)
 
 clean:
 	$(RM) $(OBJ)

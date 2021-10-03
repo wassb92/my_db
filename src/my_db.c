@@ -13,8 +13,9 @@
 
 void do_action(db_t **db, char **getline)
 {
-    if (tablen(getline) > 4)
-        assign_value(db, getline);
+    print_table(*db);
+    // if (tablen(getline) > 4)
+        // assign_value(db, getline);
 }
 
 bool main_loop(list_t **head, db_t **db)

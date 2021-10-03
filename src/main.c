@@ -28,7 +28,7 @@ static void assign_default_value(db_t **db)
     strcpy((*db)->password, STR_EMPTY_VALUE);
     strcpy((*db)->registeredAt, STR_EMPTY_VALUE);
 
-    // print_value(*db);
+    // print_brut_value(*db);
 }
 
 static bool error_handling(int ac, char **av)

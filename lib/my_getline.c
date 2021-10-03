@@ -17,6 +17,8 @@ char **my_getline(void)
     char **array = NULL;
     size_t size = 0;
 
+    printf("Database prompt > ");
+
     if (getline(&input, &size, stdin) == -1) {
         free(input);
         return NULL;
