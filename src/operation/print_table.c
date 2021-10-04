@@ -18,7 +18,8 @@ float *get_screen_size(void)
     FILE *cmd = popen("xdpyinfo | awk '/dimensions/ {print $2}'", "r");
 
     char screen_size[64];
-    while (fgets(screen_size, sizeof(screen_size), cmd) != NULL);
+    while (fgets(screen_size, sizeof(screen_size), cmd) != NULL)
+        ;
     pclose(cmd);
     array = my_str_to_word_array(screen_size, 'x');
     size[0] = atof(array[0]);
@@ -34,63 +35,58 @@ float *get_screen_size(void)
 void display_id(float length, float width, db_t *db)
 {
     printf("id\n");
-    for (float i = 0; i < (TABLE_SIZE_Y(width) / 9); ++i) {
+    for (float i = 0; i < (TABLE_SIZE_Y(width) / 9); ++i)
+    {
 
-        for (float t = 0; t < (TABLE_SIZE_X(length) / 10); ++t) {
+        for (float t = 0; t < (TABLE_SIZE_X(length) / 10); ++t)
+        {
             if (i == 0)
                 printf("-");
             else if (t == ((int)(TABLE_SIZE_X(length) / 10) - my_intlen(db->id)) / 2)
                 printf("%d", db->id);
-            else printf(" ");
+            else if ((t <= ((int)(TABLE_SIZE_X(length) / 10) - my_intlen(db->id)) / 2) ||
+            (t >= ((int)(TABLE_SIZE_X(length) / 10) + my_intlen(db->id)) / 2))
+                printf(" ");
         }
-            printf("|\n");
+        printf("|\n");
     }
     printf("\n");
 }
 
 void display_firstname(float length, float width, db_t *db)
 {
-
 }
 
 void display_lastname(float length, float width, db_t *db)
 {
-
 }
 
 void display_pseudonyme(float length, float width, db_t *db)
 {
-
 }
 
 void display_birthday(float length, float width, db_t *db)
 {
-
 }
 
 void display_city(float length, float width, db_t *db)
 {
-
 }
 
 void display_phone(float length, float width, db_t *db)
 {
-
 }
 
 void display_email(float length, float width, db_t *db)
 {
-
 }
 
 void display_password(float length, float width, db_t *db)
 {
-
 }
 
 void display_registeredAt(float length, float width, db_t *db)
 {
-
 }
 
 void print_table(db_t *db)
