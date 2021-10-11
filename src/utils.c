@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 
 void free_getline(char **getline)
 {
@@ -17,4 +18,12 @@ void free_getline(char **getline)
     }
     free(getline);
     getline = NULL;
+}
+
+unsigned short find_index(char const *str, char const **fct_name)
+{
+    for (unsigned short i = 0; fct_name[i] != NULL; ++i)
+        if (strcmp(fct_name[i], str) == 0)
+            return i;
+    return -1;
 }

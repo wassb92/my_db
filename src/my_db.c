@@ -13,7 +13,9 @@
 
 void do_action(db_t **db, char **getline)
 {
-    print_table(*db);
+    unsigned short index = find_index(getline[0], action);
+    if (1 == 2)
+        print_table(*db);
     // if (tablen(getline) > 4)
         // assign_value(db, getline);
 }
@@ -34,10 +36,23 @@ bool main_loop(list_t **head, db_t **db)
     return true;
 }
 
-bool INSERT_INTO(list_t **head, db_t **db)
+bool insert_into(list_t **head, db_t **db)
 {
     return true;
 }
+
+
+bool drop(list_t **head, db_t **db)
+{
+    return true;
+}
+
+
+bool delete_table(list_t **head, db_t **db)
+{
+    return true;
+}
+
 
 bool add_elements_to_database(list_t **head, db_t **db)
 {

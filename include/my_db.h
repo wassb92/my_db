@@ -34,10 +34,13 @@ bool main_loop(list_t **head, db_t **db);
 
 /* Utils */
 void free_getline(char **getline);
+unsigned short find_index(char const *str, char const **fct_name);
 
 /* Operation */
 void print_table(db_t *db);
-bool INSERT_INTO(list_t **head, db_t **db);
+bool insert_into(list_t **head, db_t **db);
+bool drop(list_t **head, db_t **db);
+bool delete_table(list_t **head, db_t **db);
 
 
 /* Display */
@@ -54,13 +57,13 @@ void display_password(float length, float width, db_t *db);
 void display_registeredAt(float length, float width, db_t *db);
 
 static bool (*operation[])(list_t **, db_t **) = {
-    &INSERT_INTO,
-    // &drop,
-    // &delete,
+    &insert_into,
+    &drop,
+    &delete_table,
 };
 
 
-static void (*display_field[10])(float, float, db_t *) = {
+static void (*display_field[])(float, float, db_t *) = {
     &display_id,
     &display_firstname,
     &display_lastname,

@@ -18,10 +18,14 @@ typedef struct db_s db_t;
 
 static const char STR_EMPTY_VALUE[6] = "EMPTY";
 static const char MALLOC_FAILED[27] = "Memory allocation failed !\0";
-static const unsigned short NUMBER_FIELD = 10;
 static const char SUCCESS_ASSIGNEMENT[20] = "Success assignement";
 static const char SPACE_DEL = ' ';
-static const unsigned short int FIELD_COUNT = 10;
+static const unsigned short NUMBER_FIELD = 10;
+static const char *action[] = {
+    "INSERT",
+    "DROP",
+    "DELETE"
+};
 
 enum db_operation_e
 {
