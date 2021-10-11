@@ -8,9 +8,9 @@
 #ifndef CONST_H
 #define CONST_H
 
-# define alloc_err fprintf(stderr, MALLOC_FAILED);
-# define TABLE_SIZE_X(x) ((x) / 9.1)
-# define TABLE_SIZE_Y(x) ((x) / 60)
+#define alloc_err fprintf(stderr, MALLOC_FAILED);
+#define TABLE_SIZE_X(x) ((x) / 9.1)
+#define TABLE_SIZE_Y(x) ((x) / 60)
 
 #include "my_db.h"
 
@@ -21,14 +21,17 @@ static const char MALLOC_FAILED[27] = "Memory allocation failed !\0";
 static const unsigned short NUMBER_FIELD = 10;
 static const char SUCCESS_ASSIGNEMENT[20] = "Success assignement";
 static const char SPACE_DEL = ' ';
+static const unsigned short int FIELD_COUNT = 10;
 
-enum db_operation_e {
+enum db_operation_e
+{
     _insert,
     _drop,
     _delete,
 };
 
-enum db_assign_e {
+enum db_field_e
+{
     _firstStep,
     _target,
     _tableName,
@@ -43,5 +46,6 @@ enum db_assign_e {
     _password,
     _registeredAt
 };
+
 
 #endif /* !CONST_H */

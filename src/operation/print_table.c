@@ -103,15 +103,7 @@ void print_table(db_t *db)
     for (unsigned int i = 0; i < TABLE_SIZE_X(length); ++i)
         printf("-");
     printf("\n\n\n");
-    display_id(length, width, db);
-    display_firstname(length, width, db);
-    display_lastname(length, width, db);
-    display_pseudonyme(length, width, db);
-    display_birthday(length, width, db);
-    display_city(length, width, db);
-    display_phone(length, width, db);
-    display_email(length, width, db);
-    display_password(length, width, db);
-    display_registeredAt(length, width, db);
+    for (unsigned short int i = 0; i < FIELD_COUNT; ++i)
+        display_field[i](length, width, db);
     printf("\n");
 }

@@ -11,7 +11,8 @@
 #include "list.h"
 #include "const.h"
 
-typedef struct db_s {
+typedef struct db_s
+{
     unsigned int id;
     char firstname[32];
     char lastname[32];
@@ -22,12 +23,11 @@ typedef struct db_s {
     char email[128];
     char password[128];
     char registeredAt[16];
-}db_t;
+} db_t;
 
 /* Init */
 void assign_value(db_t **db, char **getline);
 void print_brut_value(db_t *db);
-
 
 /* Loop */
 bool main_loop(list_t **head, db_t **db);
@@ -40,10 +40,37 @@ void print_table(db_t *db);
 bool INSERT_INTO(list_t **head, db_t **db);
 
 
+/* Display */
+
+void display_id(float length, float width, db_t *db);
+void display_firstname(float length, float width, db_t *db);
+void display_lastname(float length, float width, db_t *db);
+void display_pseudonyme(float length, float width, db_t *db);
+void display_birthday(float length, float width, db_t *db);
+void display_city(float length, float width, db_t *db);
+void display_phone(float length, float width, db_t *db);
+void display_email(float length, float width, db_t *db);
+void display_password(float length, float width, db_t *db);
+void display_registeredAt(float length, float width, db_t *db);
+
 static bool (*operation[])(list_t **, db_t **) = {
     &INSERT_INTO,
     // &drop,
     // &delete,
+};
+
+
+static void (*display_field[10])(float, float, db_t *) = {
+    &display_id,
+    &display_firstname,
+    &display_lastname,
+    &display_pseudonyme,
+    &display_birthday,
+    &display_city,
+    &display_phone,
+    &display_email,
+    &display_password,
+    &display_registeredAt,
 };
 
 
