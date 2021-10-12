@@ -48,7 +48,6 @@ int main(int ac, char **av)
     assign_default_value(&db);
     main_loop(&head, &db);
     free(db);
-    // for (unsigned int i = 1; i < ac; ++i)
-        // printf("%s\n", av[i]);
+
     return EXIT_SUCCESS;
 }

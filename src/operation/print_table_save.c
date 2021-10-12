@@ -18,8 +18,7 @@ float *get_screen_size(void)
     FILE *cmd = popen("xdpyinfo | awk '/dimensions/ {print $2}'", "r");
 
     char screen_size[64];
-    while (fgets(screen_size, sizeof(screen_size), cmd) != NULL)
-        ;
+    while (fgets(screen_size, sizeof(screen_size), cmd) != NULL);
     pclose(cmd);
     array = my_str_to_word_array(screen_size, 'x');
     size[0] = atof(array[0]);
@@ -104,7 +103,7 @@ void display_registeredAt(float length, float width, db_t *db)
 {
 }
 
-void print_table(db_t *db)
+bool print_table(list_t **head, db_t **db)
 {
     const float *size = get_screen_size();
     const float length = size[0];

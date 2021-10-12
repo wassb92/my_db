@@ -10,6 +10,7 @@
 
 #include "list.h"
 #include "const.h"
+#include "operation.h"
 
 typedef struct db_s
 {
@@ -34,17 +35,11 @@ bool main_loop(list_t **head, db_t **db);
 
 /* Utils */
 void free_getline(char **getline);
-unsigned short find_index(char const *str, char const **fct_name);
-
-/* Operation */
-void print_table(db_t *db);
-bool insert_into(list_t **head, db_t **db);
-bool drop(list_t **head, db_t **db);
-bool delete_table(list_t **head, db_t **db);
+short find_index(char const *str, char const **fct_name);
+float *get_screen_size(void);
 
 
 /* Display */
-
 void display_id(float length, float width, db_t *db);
 void display_firstname(float length, float width, db_t *db);
 void display_lastname(float length, float width, db_t *db);
@@ -57,9 +52,10 @@ void display_password(float length, float width, db_t *db);
 void display_registeredAt(float length, float width, db_t *db);
 
 static bool (*operation[])(list_t **, db_t **) = {
-    &insert_into,
+    &insert,
+    &delete_rows,
     &drop,
-    &delete_table,
+    &print_table
 };
 
 

@@ -14,7 +14,7 @@ unsigned int list_len(list_t *head)
 void print_list(list_t *head)
 {
     while (head) {
-            printf("[%s]%c", (char *)head->data, (head->next == NULL ? '\n' : ' '));
+        printf("[%s]\n", (char *)head->data);
         head = head->next;
     }
 }
@@ -48,9 +48,10 @@ bool add_back(list_t **head, void *data)
     node->next = NULL;
     node->data = data;
 
-    if (!*head)
+    if (!*head) {
+        free(node);
         return add_front(head, data);
-
+    }
     while (tmp->next)
         tmp = tmp->next;
 
@@ -74,7 +75,6 @@ bool add_at_position(list_t **head, void *data, unsigned int position)
         node->next = current;
         return true;
     }
-
     for (unsigned int i = 0; i < position - 1; ++i) {
         previous = current;
         current = previous->next;
@@ -132,9 +132,8 @@ void free_list(list_t **head)
     list_t *save = (*head);
     static bool is_freed = false;
 
-    if (is_freed)
+    if (is_freed || !*head || !head || !save || list_len(*head) == 0)
         return;
-
     while (save) {
         save = (*head)->next;
         free(*head);

@@ -2,13 +2,13 @@
 ** EPITECH PROJECT, 2021
 ** my_db
 ** File description:
-** delete data
+** drop_data
 */
 
 #include "my_db.h"
 
-bool delete_rows(list_t **head, db_t **db)
+bool drop(list_t **head, db_t **db)
 {
-    printf("delete_rows\n");
+    printf("drop\n");
     return true;
 }

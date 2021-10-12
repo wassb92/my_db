@@ -19,19 +19,26 @@ typedef struct db_s db_t;
 static const char STR_EMPTY_VALUE[6] = "EMPTY";
 static const char MALLOC_FAILED[27] = "Memory allocation failed !\0";
 static const char SUCCESS_ASSIGNEMENT[20] = "Success assignement";
+static const char COMMAND_NOT_FOUND[174] = "Command not found, please retry with these command :\n\
+\tINSERT to insert element in table\n\
+\tDELETE to delete a row from table\n\
+\tDROP to drop the table (and so remove all datas)\n";
 static const char SPACE_DEL = ' ';
 static const unsigned short NUMBER_FIELD = 10;
 static const char *action[] = {
     "INSERT",
+    "DELETE",
     "DROP",
-    "DELETE"
+    "SELECT",
+    ((void *)0)
 };
 
 enum db_operation_e
 {
     _insert,
-    _drop,
     _delete,
+    _drop,
+    _select
 };
 
 enum db_field_e
