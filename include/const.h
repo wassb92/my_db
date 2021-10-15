@@ -11,6 +11,7 @@
 #define alloc_err fprintf(stderr, MALLOC_FAILED);
 #define TABLE_SIZE_X(x) ((x) / 9.1)
 #define TABLE_SIZE_Y(x) ((x) / 60)
+#define NUMBER_FIELD tablen(field_name)
 
 #include "my_db.h"
 
@@ -24,7 +25,6 @@ static const char COMMAND_NOT_FOUND[174] = "Command not found, please retry with
 \tDELETE to delete a row from table\n\
 \tDROP to drop the table (and so remove all datas)\n";
 static const char SPACE_DEL = ' ';
-static const unsigned short NUMBER_FIELD = 10;
 static const char *action[] = {
     "INSERT",
     "DELETE",
@@ -33,16 +33,28 @@ static const char *action[] = {
     ((void *)0)
 };
 
-enum db_operation_e
-{
+static const char *field_name[] = {
+    "id",
+    "firstname",
+    "lastname",
+    "pseudonyme",
+    "birthday",
+    "city",
+    "phone",
+    "email",
+    "password",
+    "registeredAt",
+    ((void *)0),
+};
+
+enum db_operation_e {
     _insert,
     _delete,
     _drop,
     _select
 };
 
-enum db_field_e
-{
+enum db_field_e {
     _firstStep,
     _target,
     _tableName,

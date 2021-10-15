@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "my.h"
 
-unsigned int my_strlen(char *str)
+unsigned int my_strlen(char const *str)
 {
     unsigned int i = 0;
 
@@ -86,7 +86,7 @@ char **my_str_to_word_array(char *str, char const del)
     return array;
 }
 
-unsigned int tablen(char **array)
+unsigned int tablen(char const **array)
 {
     unsigned int i = 0;
 

@@ -12,7 +12,7 @@
 
 void print_brut_value(db_t *db)
 {
-    printf("id = %u\n", db->id);
+    printf("id = %lld\n", db->id);
     printf("firstname = %s\n", db->firstname);
     printf("lastname = %s\n", db->lastname);
     printf("pseudonyme = %s\n", db->pseudonyme);

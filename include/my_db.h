@@ -14,7 +14,7 @@
 
 typedef struct db_s
 {
-    unsigned int id;
+    unsigned long long int id;
     char firstname[32];
     char lastname[32];
     char pseudonyme[32];
