@@ -5,8 +5,8 @@
 ** const
 */
 
-#ifndef CONST_H
-#define CONST_H
+#ifndef CONST_H_INCLUDED
+#define CONST_H_INCLUDED
 
 #define alloc_err fprintf(stderr, MALLOC_FAILED);
 #define TABLE_SIZE_X(x) ((x) / 9.1)
@@ -15,11 +15,10 @@
 
 #include "my_db.h"
 
-typedef struct db_s db_t;
-
 static const char STR_EMPTY_VALUE[6] = "EMPTY";
-static const char MALLOC_FAILED[27] = "Memory allocation failed !\0";
+static const char table_name[16] = "Register_table";
 static const char SUCCESS_ASSIGNEMENT[20] = "Success assignement";
+static const char MALLOC_FAILED[27] = "Memory allocation failed !\0";
 static const char COMMAND_NOT_FOUND[174] = "Command not found, please retry with these command :\n\
 \tINSERT to insert element in table\n\
 \tDELETE to delete a row from table\n\

@@ -1,6 +1,22 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "list.h"
+#include <string.h>
+#include "my_db.h"
+
+void dbcpy(list_t *dest, db_t *src)
+{
+    dest->data->id = src->id;
+
+    strcpy(dest->data->firstname, src->firstname);
+    strcpy(dest->data->lastname, src->lastname);
+    strcpy(dest->data->pseudonyme, src->pseudonyme);
+    strcpy(dest->data->birthday, src->birthday);
+    strcpy(dest->data->city, src->city);
+    strcpy(dest->data->phone, src->phone);
+    strcpy(dest->data->email, src->email);
+    strcpy(dest->data->password, src->password);
+    strcpy(dest->data->registeredAt, src->registeredAt);
+}
 
 unsigned int list_len(list_t *head)
 {
@@ -59,28 +75,32 @@ bool add_back(list_t **head, void *data)
     return true;
 }
 
-bool add_at_position(list_t **head, void *data, unsigned int position)
+bool add_at_position(list_t **head, db_t *elem, unsigned int position)
 {
-    list_t *node = malloc(sizeof(list_t));
+    list_t *pre = *head;
     list_t *current = *head;
-    list_t *previous = *head;
+    list_t *cell = malloc(sizeof(list_t));
 
-    if (!node || !head)
+    if (!cell || position > list_len(*head))
         return false;
-    node->next = NULL;
-    node->data = data;
 
-    if (position == 0) {
-        (*head) = node;
-        node->next = current;
+    cell->data = malloc(sizeof(db_t));
+    dbcpy(cell, elem);
+
+    cell->next = NULL;
+    if (position == 0)
+    {
+        cell->next = *head;
+        *head = cell;
         return true;
     }
-    for (unsigned int i = 0; i < position - 1; ++i) {
-        previous = current;
-        current = previous->next;
+    for (unsigned int i = 0; i < position; ++i)
+    {
+        pre = current;
+        current = current->next;
     }
-    previous->next = node;
-    node->next = current;
+    pre->next = cell;
+    cell->next = current;
     return true;
 }
 
@@ -136,6 +156,7 @@ void free_list(list_t **head)
         return;
     while (save) {
         save = (*head)->next;
+        free((*head)->data);
         free(*head);
         *head = save;
     }

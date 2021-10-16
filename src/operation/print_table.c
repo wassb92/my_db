@@ -11,15 +11,6 @@
 #include "my_db.h"
 #include "my.h"
 
-void print_in_middle(db_t *db, float t, float length, float width)
-{
-    if ((t <= ((int)(TABLE_SIZE_X(length) / 10) - my_intlen(db->id)) / 2) ||
-        (t > ((int)(TABLE_SIZE_X(length) / 10) + my_intlen(db->id)) / 2))
-        printf(" ");
-    if (t == ((int)(TABLE_SIZE_X(length) / 10) - my_intlen(db->id)) / 2)
-        printf("%lld", db->id);
-}
-
 void print_field_name(char const *str, float length)
 {
     static unsigned short i = 0;
@@ -46,14 +37,6 @@ void print_field_name(char const *str, float length)
     print_field_name(field_name[++t], length);
 }
 
-void print_separator1(float length)
-{
-    printf("\n");
-    for (unsigned short i = 0; i < (TABLE_SIZE_X(length)); ++i)
-        i %NUMBER_FIELD == 0 ? printf("+") : printf("-");
-    printf("\n");
-}
-
 void print_separator(char const *str, float length)
 {
     static unsigned short i = 0;
@@ -72,136 +55,34 @@ void print_separator(char const *str, float length)
         printf("-");
     if (strcmp(str, field_name[NUMBER_FIELD - 1]) != 0)
         printf("+");
-
 }
 
-void display_id(float length, float width, db_t *db)
+void display_id(unsigned long long int id, float length)
 {
-
-}
-void display_id1(float length, float width, db_t *db)
-{
-    print_field_name("id", length);
-    for (float i = 0; i < (TABLE_SIZE_Y(width) / 9); ++i)
-    {
-        for (float t = 0; t < (TABLE_SIZE_X(length) / 10); ++t)
-        {
-            if (i == 0)
-                printf("-");
-            else print_in_middle(db, t, length, width);
-        }
-        printf("|\n");
-    }
-    printf("\n");
-}
-
-void display_firstname1(float length, float width, db_t *db)
-{
-    printf("firstname\n");
-    for (float i = 0; i < (TABLE_SIZE_Y(width) / 9); ++i)
-    {
-        for (float t = 0; t < (TABLE_SIZE_X(length) / 10); ++t)
-        {
-            if (i == 0)
-                printf("-");
-            else if (t == ((int)(TABLE_SIZE_X(length) / 10) - my_strlen(db->firstname)) / 2)
-                printf("%s", db->firstname);
-            else if ((t <= ((int)(TABLE_SIZE_X(length) / 10) - my_strlen(db->firstname)) / 2) ||
-                (t >= ((int)(TABLE_SIZE_X(length) / 10) + my_strlen(db->firstname)) / 2))
-                printf(" ");
-        }
-        printf("|\n");
-    }
-    printf("\n");
-}
-
-void display_id10(unsigned long long int id, float length)
-{
-    static unsigned short i = 2;
+    static unsigned short i = 0;
     static unsigned short tmp = 0;
 
-    for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_intlen(id) / 2)) - 1; ++i)
+    for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_intlen(id) / 2)) - my_intlen(id); ++i)
         printf(" ");
     printf("%lld", id);
-    tmp = i;
 
-        --i;
-    for (; i > 0; --i)
+    for (; i > 1; --i)
         printf(" ");
-        printf("|");
+    printf("|");
 }
 
 
 void display(char const *data, float length)
 {
     static unsigned short i = 0;
-    static unsigned short tmp = 0;
 
-    if (strcmp(data, field_name[0]) == 0)
-        i = 2;
     for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_strlen(data) / 2)) - 1; ++i)
         printf(" ");
     printf("%s", data);
-    tmp = i;
 
-    if (strcmp(data, field_name[0]) == 0)
-        --i;
     for (; i > 0; --i)
         printf(" ");
-        printf("|");
-}
-
-
-void display_firstname(float length, float width, db_t *db)
-{
-    // printf("firstname\n");
-    // for (float i = 0; i < (TABLE_SIZE_Y(width) / 9); ++i)
-    // {
-    //     for (float t = 0; t < (TABLE_SIZE_X(length) / 10); ++t)
-    //     {
-    //         if (i == 0)
-    //             printf("-");
-    //         else if (t == ((int)(TABLE_SIZE_X(length) / 10) - my_strlen(db->firstname)) / 2)
-    //             printf("%s", db->firstname);
-    //         else if ((t <= ((int)(TABLE_SIZE_X(length) / 10) - my_strlen(db->firstname)) / 2) ||
-    //             (t >= ((int)(TABLE_SIZE_X(length) / 10) + my_strlen(db->firstname)) / 2))
-    //             printf(" ");
-    //     }
-    //     printf("|\n");
-    // }
-    // printf("\n");
-}
-
-void display_lastname(float length, float width, db_t *db)
-{
-}
-
-void display_pseudonyme(float length, float width, db_t *db)
-{
-}
-
-void display_birthday(float length, float width, db_t *db)
-{
-}
-
-void display_city(float length, float width, db_t *db)
-{
-}
-
-void display_phone(float length, float width, db_t *db)
-{
-}
-
-void display_email(float length, float width, db_t *db)
-{
-}
-
-void display_password(float length, float width, db_t *db)
-{
-}
-
-void display_registeredAt(float length, float width, db_t *db)
-{
+    printf("|");
 }
 
 bool print_table(list_t **head, db_t **db)
@@ -209,7 +90,7 @@ bool print_table(list_t **head, db_t **db)
     const float *size = get_screen_size();
     const float length = size[0];
     const float width = size[1];
-    const char table_name[16] = "Register_table";
+    list_t *tmp = *head;
 
     for (unsigned int i = 0; i < ((TABLE_SIZE_X(length) / 2) - (my_strlen((char *)table_name)) / 2); ++i)
         printf(" ");
@@ -217,25 +98,41 @@ bool print_table(list_t **head, db_t **db)
     for (unsigned int i = 0; i < TABLE_SIZE_X(length); ++i)
         printf("-");
     printf("\n\n\n");
-    // for (unsigned short int i = 0; i < NUMBER_FIELD; ++i)
-        // display_field[i](length, width, *db);
-
     print_field_name(field_name[0], length);
     printf("\n");
-    for (unsigned short int i = 0; i < NUMBER_FIELD; ++i) {
+    for (unsigned short int i = 0; i < NUMBER_FIELD; ++i)
         print_separator(field_name[i], length);
-    }
     printf("\n");
-    display_id10((*db)->id, length);
-    display((*db)->firstname, length);
-    display((*db)->lastname, length);
-    display((*db)->pseudonyme, length);
-    display((*db)->birthday, length);
-    display((*db)->city, length);
-    display((*db)->phone, length);
-    display((*db)->email, length);
-    display((*db)->password, length);
-    display((*db)->registeredAt, length);
+
+//
+    // db_t *db_data1 = {1, "Arthur", "Dupont", "Art123", "05/03/2000", "Paris", "06.05.04.03.02", "ArthurDupont@gmail.com", "arthur123", "03/10/2021"};
+    // db_t *db_data2 = {2, "Arthurr", "Dupontt", "Art1234", "05/03/2001", "Pariss", "06.05.04.03.03", "ArthurDupont@gmail.comm", "arthur1234", "03/10/2022"};
+    // db_t *db_data3 = {3, "Arthurrr", "Duponttt", "Art12345", "05/03/2002", "Parisss", "06.05.04.03.04", "ArthurDupont@gmail.commm", "arthur12345", "03/10/2023"};
+    // db_t *db_data4 = {4, "Arthurrrr", "Dupontttt", "Art123456", "05/03/2003", "Parissss", "06.05.04.03.05", "ArthurDupont@gmail.commmm", "arthur123456", "03/10/2024"};
+//
+    // add_back(&tmp, &db_data1);
+    // add_back(&tmp, &db_data2);
+    // add_back(&tmp, &db_data3);
+    // add_back(&tmp, &db_data4);
+//
+    // while (tmp) {
+        // display_id((*db)->id, length);
+        // printf("\n");
+        // tmp = tmp->next;
+    // }
+    while (tmp) {
+        printf("%lld\n", tmp->data->id);
+        tmp = tmp->next;
+    }
+    // display((*db)->firstname, length);
+    // display((*db)->lastname, length);
+    // display((*db)->pseudonyme, length);
+    // display((*db)->birthday, length);
+    // display((*db)->city, length);
+    // display((*db)->phone, length);
+    // display((*db)->email, length);
+    // display((*db)->password, length);
+    // display((*db)->registeredAt, length);
     printf("\n");
 
     return true;

@@ -5,12 +5,10 @@
 ** operation header
 */
 
-#ifndef OPERATION_H
-#define OPERATION_H
+#ifndef OPERATION_H_INCLUDED
+#define OPERATION_H_INCLUDED
 
 #include "my_db.h"
-typedef struct db_s db_t;
-
 
 /* Operation */
 

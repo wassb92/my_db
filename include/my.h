@@ -5,8 +5,8 @@
 ** include
 */
 
-#ifndef MY_H_
-#define MY_H_
+#ifndef MY_H_INCLUDED
+#define MY_H_INCLUDED
 
 #include <stdbool.h>
 

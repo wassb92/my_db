@@ -9,6 +9,6 @@
 
 bool insert(list_t **head, db_t **db)
 {
-    add_back(head, *db);
+    add_at_position(head, (*db), list_len((*head)));
     return true;
 }
