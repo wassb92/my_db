@@ -26,7 +26,11 @@ void print_brut_value(db_t *db)
 
 void assign_value(db_t **db, char **getline)
 {
-    ++(*db)->id;
+    // ++(*db)->id;
+    if ((*db)->id == 0)
+        ++(*db)->id;
+    else
+        (*db)->id += 100;
 
     strcpy((*db)->firstname, getline[_firstname]);
     strcpy((*db)->lastname, getline[_lastname]);

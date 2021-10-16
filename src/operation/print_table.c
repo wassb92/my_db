@@ -27,8 +27,8 @@ void print_field_name(char const *str, float length)
     printf("%s", str);
     tmp = i;
 
-    if (strcmp(str, field_name[0]) == 0)
-        --i;
+    // if (strcmp(str, field_name[0]) == 0)
+        // --i;
     for (; i > 0; --i)
         printf(" ");
     if (t + 1 < NUMBER_FIELD)
@@ -49,8 +49,8 @@ void print_separator(char const *str, float length)
     for (unsigned short t = 0; t < my_strlen(str); ++t)
         printf("-");
     tmp = i;
-    if (strcmp(str, field_name[0]) == 0)
-        --i;
+    // if (strcmp(str, field_name[0]) == 0)
+        // --i;
     for (; i > 0; --i)
         printf("-");
     if (strcmp(str, field_name[NUMBER_FIELD - 1]) != 0)
@@ -59,69 +59,24 @@ void print_separator(char const *str, float length)
 
 void display_id(unsigned long long int id, float length)
 {
-    static unsigned short i = 1;
-    static unsigned short tmp = 0;
+    short tmp = 0;
+    int len = my_intlen(id);
+    short last_space = len == 0 ? 2 : 0;
+    short i = last_space - len + 1;
 
-    for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_intlen(id) / 2)) - my_intlen(id) - 1; ++i)
+    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - len - 1; ++i)
         printf(" ");
     printf("%lld", id);
 
-    for (; i > 1; --i)
-        printf(" ");
-    printf("|");
-}
-
-void display_firstname(char const *data, float length)
-{
-    unsigned short i = 0;
-    unsigned int len = my_strlen(data);
-
-    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
-        printf(" ");
-    printf("%s", data);
-
-    if (len % 2 == 0)
+    if (last_space == 2)
         ++i;
 
-    for (; i > 0; --i)
+    for (; i > last_space - 1; --i)
         printf(" ");
-
     printf("|");
 }
 
-void display_lastname(char const *data, float length)
-{
-    unsigned short i = 0;
-    unsigned int len = my_strlen(data);
-
-    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
-        printf(" ");
-    printf("%s", data);
-
-    for (; i > 0; --i)
-        printf(" ");
-
-    printf("|");
-}
-
-void display_pseudonyme(char const *data, float length)
-{
-    unsigned short i = 0;
-    unsigned int len = my_strlen(data);
-
-    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
-        printf(" ");
-    printf("%s", data);
-
-    if (len % 2 != 0)
-        --i;
-    for (; i > 0; --i)
-        printf(" ");
-
-    printf("|");
-}
-
-void display_city(char const *data, float length)
+void display_field(char const *data, float length)
 {
     unsigned short i = 0;
     unsigned int len = my_strlen(data);
@@ -160,11 +115,8 @@ bool print_table(list_t **head, db_t **db)
 
     for (; tmp; tmp = tmp->next) {
         display_id(tmp->data->id, length);
-        display_firstname(tmp->data->firstname, length);
-        display_lastname(tmp->data->lastname, length);
-        display_pseudonyme(tmp->data->pseudonyme, length);
-        display_pseudonyme(tmp->data->birthday, length);
-        // display_city(tmp->data->city, length);
+        display_field(tmp->data->firstname, length);
+        // display_field(tmp->data->lastname, length);
         printf("\n");
     }
     printf("\n");
