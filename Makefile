@@ -6,6 +6,7 @@
 ##
 
 OPERATION	=	src/operation/print_table.c	\
+				src/operation/print_init_table.c	\
 				src/operation/insert_data.c	\
 				src/operation/delete_data.c	\
 

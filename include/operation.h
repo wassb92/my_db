@@ -24,8 +24,7 @@ bool drop(list_t **head, db_t **db);
 
 /* PRINT TABLE DATAS */
 bool print_table(list_t **head, db_t **db);
-
-
+void init_print_table(float length);
 
 
 #endif /* !OPERATION_H */

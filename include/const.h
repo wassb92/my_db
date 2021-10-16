@@ -15,6 +15,9 @@
 
 #include "my_db.h"
 
+static const char SPACE[2] = " ";
+static const char HYPHEN[2] = "-";
+static const char PLUS[2] = "+";
 static const char PIPE[2] = "|";
 static const char DOTS[6] = "...";
 static const char STR_EMPTY_VALUE[6] = "EMPTY";
@@ -37,13 +40,13 @@ static const char *action[] = {
 static const char *field_name[] = {
     "id",
     "firstname",
-    "lastname ",
-    "pseudonyme ",
-    "birthday ",
-    "city ",
+    "lastname",
+    "pseudonyme",
+    "birthday",
+    "city",
     "phone",
     "email",
-    "password ",
+    "password",
     "registeredAt",
     ((void *)0),
 };
