@@ -34,16 +34,14 @@ float *get_screen_size(void)
 {
     static float size[2];
     char **array = NULL;
-
+    char screen_size[64];
     FILE *cmd = popen("xdpyinfo | awk '/dimensions/ {print $2}'", "r");
 
-    char screen_size[64];
     while (fgets(screen_size, sizeof(screen_size), cmd) != NULL);
     pclose(cmd);
     array = my_str_to_word_array(screen_size, 'x');
     size[0] = atof(array[0]);
     size[1] = atof(array[1]);
-    size[2] = -1;
     for (unsigned int i = 0; array[i] != NULL; ++i)
         free(array[i]);
     free(array);

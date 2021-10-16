@@ -13,9 +13,9 @@
 
 void print_field_name(char const *str, float length)
 {
-    static unsigned short i = 0;
+    unsigned short i = 0;
     static unsigned short t = 0;
-    static unsigned short tmp = 0;
+    unsigned short tmp = 0;
 
     if (t == NUMBER_FIELD)
         return;
@@ -27,20 +27,18 @@ void print_field_name(char const *str, float length)
     printf("%s", str);
     tmp = i;
 
-    // if (strcmp(str, field_name[0]) == 0)
-        // --i;
     for (; i > 0; --i)
         printf(" ");
     if (t + 1 < NUMBER_FIELD)
-        printf("|");
+        printf(PIPE);
 
     print_field_name(field_name[++t], length);
 }
 
 void print_separator(char const *str, float length)
 {
-    static unsigned short i = 0;
-    static unsigned short tmp = 0;
+    unsigned short i = 0;
+    unsigned short tmp = 0;
 
     if (strcmp(str, field_name[0]) == 0)
         i = 2;
@@ -49,8 +47,6 @@ void print_separator(char const *str, float length)
     for (unsigned short t = 0; t < my_strlen(str); ++t)
         printf("-");
     tmp = i;
-    // if (strcmp(str, field_name[0]) == 0)
-        // --i;
     for (; i > 0; --i)
         printf("-");
     if (strcmp(str, field_name[NUMBER_FIELD - 1]) != 0)
@@ -72,13 +68,26 @@ void display_id(unsigned long long int id, float length)
     for (; i > 1; --i)
         printf(" ");
 
-    printf("|");
+    printf(PIPE);
+}
+
+void display_long_string(char const *data, float length)
+{
+    for (unsigned short i = 0; i < ((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) - my_strlen(DOTS); ++i)
+        printf("%c", data[i]);
+    printf(DOTS);
+    printf(PIPE);
 }
 
 void display_field(char const *data, float length)
 {
-    unsigned short i = 0;
-    unsigned int len = my_strlen(data);
+    short i = 0;
+    int len = my_strlen(data);
+    static unsigned short index = 1;
+    ++index;
+
+    if (len > ((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)))
+        return display_long_string(data, length);
 
     for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
         printf(" ");
@@ -90,7 +99,10 @@ void display_field(char const *data, float length)
     for (; i > 0; --i)
         printf(" ");
 
-    printf("|");
+    if (index != NUMBER_FIELD)
+        printf(PIPE);
+    else
+        index = 1;
 }
 
 bool print_table(list_t **head, db_t **db)
@@ -98,6 +110,7 @@ bool print_table(list_t **head, db_t **db)
     const float *size = get_screen_size();
     const float length = size[0];
     const float width = size[1];
+
     list_t *tmp = *head;
 
     for (unsigned int i = 0; i < ((TABLE_SIZE_X(length) / 2) - (my_strlen((char *)table_name)) / 2); ++i)
@@ -115,7 +128,14 @@ bool print_table(list_t **head, db_t **db)
     for (; tmp; tmp = tmp->next) {
         display_id(tmp->data->id, length);
         display_field(tmp->data->firstname, length);
-        // display_field(tmp->data->lastname, length);
+        display_field(tmp->data->lastname, length);
+        display_field(tmp->data->pseudonyme, length);
+        display_field(tmp->data->birthday, length);
+        display_field(tmp->data->city, length);
+        display_field(tmp->data->phone, length);
+        display_field(tmp->data->email, length);
+        display_field(tmp->data->password, length);
+        display_field(tmp->data->registeredAt, length);
         printf("\n");
     }
     printf("\n");
