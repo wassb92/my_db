@@ -71,26 +71,72 @@ void display_id(unsigned long long int id, float length)
     printf("|");
 }
 
-void display_str_field(char const *data, float length)
+void display_firstname(char const *data, float length)
 {
     unsigned short i = 0;
-    static unsigned short status = 0;
+    unsigned int len = my_strlen(data);
 
-    if (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_strlen(data) / 2) > 100)
-        for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_strlen(data) / 2)); ++i)
-            printf(" ");
+    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
+        printf(" ");
+    printf("%s", data);
+
+    if (len % 2 == 0)
+        ++i;
+
+    for (; i > 0; --i)
+        printf(" ");
+
+    printf("|");
+}
+
+void display_lastname(char const *data, float length)
+{
+    unsigned short i = 0;
+    unsigned int len = my_strlen(data);
+
+    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
+        printf(" ");
     printf("%s", data);
 
     for (; i > 0; --i)
         printf(" ");
-    ++status;
 
-    if (status == 9) {
-        printf("\n");
-        status = 0;
-        return;
-    }
-    printf("\n");
+    printf("|");
+}
+
+void display_pseudonyme(char const *data, float length)
+{
+    unsigned short i = 0;
+    unsigned int len = my_strlen(data);
+
+    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
+        printf(" ");
+    printf("%s", data);
+
+    if (len % 2 != 0)
+        --i;
+    for (; i > 0; --i)
+        printf(" ");
+
+    printf("|");
+}
+
+void display_city(char const *data, float length)
+{
+    unsigned short i = 0;
+    unsigned int len = my_strlen(data);
+
+    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
+        printf(" ");
+    printf("%s", data);
+
+    if (len % 2 == 0)
+        ++i;
+
+    for (; i > 0; --i)
+        printf(" ");
+
+    printf("|");
 }
 
 bool print_table(list_t **head, db_t **db)
@@ -112,22 +158,14 @@ bool print_table(list_t **head, db_t **db)
         print_separator(field_name[i], length);
     printf("\n");
 
-    // for (; tmp; tmp = tmp->next) {
-    //     display_id(tmp->data->id, length);
-    //     display_str_field(tmp->data->firstname, length);
-    //     display_str_field(tmp->data->lastname, length);
-    //     display_str_field(tmp->data->pseudonyme, length);
-    //     display_str_field(tmp->data->birthday, length);
-    //     display_str_field(tmp->data->city, length);
-    //     display_str_field(tmp->data->phone, length);
-    //     // display_str_field(tmp->data->email, length);
-    //     display_str_field(tmp->data->password, length);
-    //     display_str_field(tmp->data->registeredAt, length);
-    // }
-
-     for (; tmp; tmp = tmp->next) {
+    for (; tmp; tmp = tmp->next) {
         display_id(tmp->data->id, length);
-        display_str_field(tmp->data->firstname, length);
+        display_firstname(tmp->data->firstname, length);
+        display_lastname(tmp->data->lastname, length);
+        display_pseudonyme(tmp->data->pseudonyme, length);
+        display_pseudonyme(tmp->data->birthday, length);
+        // display_city(tmp->data->city, length);
+        printf("\n");
     }
     printf("\n");
 
