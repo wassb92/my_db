@@ -59,10 +59,10 @@ void print_separator(char const *str, float length)
 
 void display_id(unsigned long long int id, float length)
 {
-    static unsigned short i = 0;
+    static unsigned short i = 1;
     static unsigned short tmp = 0;
 
-    for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_intlen(id) / 2)) - my_intlen(id); ++i)
+    for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_intlen(id) / 2)) - my_intlen(id) - 1; ++i)
         printf(" ");
     printf("%lld", id);
 
@@ -71,18 +71,26 @@ void display_id(unsigned long long int id, float length)
     printf("|");
 }
 
-
-void display(char const *data, float length)
+void display_str_field(char const *data, float length)
 {
-    static unsigned short i = 0;
+    unsigned short i = 0;
+    static unsigned short status = 0;
 
-    for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_strlen(data) / 2)) - 1; ++i)
-        printf(" ");
+    if (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_strlen(data) / 2) > 100)
+        for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_strlen(data) / 2)); ++i)
+            printf(" ");
     printf("%s", data);
 
     for (; i > 0; --i)
         printf(" ");
-    printf("|");
+    ++status;
+
+    if (status == 9) {
+        printf("\n");
+        status = 0;
+        return;
+    }
+    printf("\n");
 }
 
 bool print_table(list_t **head, db_t **db)
@@ -104,35 +112,23 @@ bool print_table(list_t **head, db_t **db)
         print_separator(field_name[i], length);
     printf("\n");
 
-//
-    // db_t *db_data1 = {1, "Arthur", "Dupont", "Art123", "05/03/2000", "Paris", "06.05.04.03.02", "ArthurDupont@gmail.com", "arthur123", "03/10/2021"};
-    // db_t *db_data2 = {2, "Arthurr", "Dupontt", "Art1234", "05/03/2001", "Pariss", "06.05.04.03.03", "ArthurDupont@gmail.comm", "arthur1234", "03/10/2022"};
-    // db_t *db_data3 = {3, "Arthurrr", "Duponttt", "Art12345", "05/03/2002", "Parisss", "06.05.04.03.04", "ArthurDupont@gmail.commm", "arthur12345", "03/10/2023"};
-    // db_t *db_data4 = {4, "Arthurrrr", "Dupontttt", "Art123456", "05/03/2003", "Parissss", "06.05.04.03.05", "ArthurDupont@gmail.commmm", "arthur123456", "03/10/2024"};
-//
-    // add_back(&tmp, &db_data1);
-    // add_back(&tmp, &db_data2);
-    // add_back(&tmp, &db_data3);
-    // add_back(&tmp, &db_data4);
-//
-    // while (tmp) {
-        // display_id((*db)->id, length);
-        // printf("\n");
-        // tmp = tmp->next;
+    // for (; tmp; tmp = tmp->next) {
+    //     display_id(tmp->data->id, length);
+    //     display_str_field(tmp->data->firstname, length);
+    //     display_str_field(tmp->data->lastname, length);
+    //     display_str_field(tmp->data->pseudonyme, length);
+    //     display_str_field(tmp->data->birthday, length);
+    //     display_str_field(tmp->data->city, length);
+    //     display_str_field(tmp->data->phone, length);
+    //     // display_str_field(tmp->data->email, length);
+    //     display_str_field(tmp->data->password, length);
+    //     display_str_field(tmp->data->registeredAt, length);
     // }
-    while (tmp) {
-        printf("%lld\n", tmp->data->id);
-        tmp = tmp->next;
+
+     for (; tmp; tmp = tmp->next) {
+        display_id(tmp->data->id, length);
+        display_str_field(tmp->data->firstname, length);
     }
-    // display((*db)->firstname, length);
-    // display((*db)->lastname, length);
-    // display((*db)->pseudonyme, length);
-    // display((*db)->birthday, length);
-    // display((*db)->city, length);
-    // display((*db)->phone, length);
-    // display((*db)->email, length);
-    // display((*db)->password, length);
-    // display((*db)->registeredAt, length);
     printf("\n");
 
     return true;
