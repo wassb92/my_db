@@ -59,20 +59,19 @@ void print_separator(char const *str, float length)
 
 void display_id(unsigned long long int id, float length)
 {
-    short tmp = 0;
-    int len = my_intlen(id);
-    short last_space = len == 0 ? 2 : 0;
-    short i = last_space - len + 1;
+    unsigned short i = 2;
+    unsigned int len = my_intlen(id);
 
-    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - len - 1; ++i)
+    for (; i < (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD)) / 2) - (len / 2); ++i)
         printf(" ");
     printf("%lld", id);
 
-    if (last_space == 2)
+    if (len % 2 == 0)
         ++i;
 
-    for (; i > last_space - 1; --i)
+    for (; i > 1; --i)
         printf(" ");
+
     printf("|");
 }
 

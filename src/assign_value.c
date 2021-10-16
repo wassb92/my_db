@@ -30,7 +30,11 @@ void assign_value(db_t **db, char **getline)
     if ((*db)->id == 0)
         ++(*db)->id;
     else
-        (*db)->id += 100;
+        if ((*db)->id > 100)
+            (*db)->id += (*db)->id;
+        else
+            (*db)->id += 98;
+
 
     strcpy((*db)->firstname, getline[_firstname]);
     strcpy((*db)->lastname, getline[_lastname]);
