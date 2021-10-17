@@ -9,6 +9,6 @@
 
 bool drop(list_t **head, db_t **db)
 {
-    printf("drop\n");
+    free_list(head);
     return true;
 }

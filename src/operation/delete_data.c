@@ -9,6 +9,6 @@
 
 bool delete_rows(list_t **head, db_t **db)
 {
-    // printf("delete_rows\n");
+    remove_at_position(head, 3);
     return true;
 }

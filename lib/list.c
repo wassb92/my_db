@@ -133,16 +133,25 @@ bool remove_back(list_t **head)
 
 bool remove_at_position(list_t **head, unsigned int position)
 {
-    list_t *tmp = *head;
-    list_t *save = *head;
+    list_t *temp = *head;
+    list_t *next = NULL;
 
-    if (!tmp || !save || !*head || position > list_len(*head))
+    if (*head == NULL)
         return false;
-
-    for (unsigned int i = 0; i < position - 1; ++i, tmp = tmp->next)
-        save = tmp;
-    save->next = tmp->next;
-    free(tmp);
+    if (position == 0) {
+        *head = temp->next;
+        free(temp->data);
+        free(temp);
+        return true;
+    }
+    for (unsigned int i = 0; temp != NULL && i < position - 1; ++i)
+        temp = temp->next;
+    if (temp == NULL || temp->next == NULL)
+        return false;
+    next = temp->next->next;
+    free(temp->next->data);
+    free(temp->next);
+    temp->next = next;
 
     return true;
 }
