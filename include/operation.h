@@ -14,16 +14,16 @@
 
 
 /* INSERT DATA */
-bool insert(list_t **head, db_t **db);
+bool insert(list_t **head, db_t **db, char **getline);
 
 /* DELETE ROWS */
-bool delete_rows(list_t **head, db_t **db);
+bool delete_rows(list_t **head, db_t **db, char **getline);
 
 /* DROP TABLE */
-bool drop(list_t **head, db_t **db);
+bool drop(list_t **head, db_t **db, char **getline);
 
 /* PRINT TABLE DATAS */
-bool print_table(list_t **head, db_t **db);
+bool print_table(list_t **head, db_t **db, char **getline);
 void init_print_table(float length);
 
 

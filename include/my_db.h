@@ -51,7 +51,7 @@ float *get_screen_size(void);
 // void display_password(float length, float width, db_t *db);
 // void display_registeredAt(float length, float width, db_t *db);
 
-static bool (*operation[])(list_t **, db_t **) = {
+static bool (*operation[])(list_t **, db_t **, char **) = {
     &insert,
     &delete_rows,
     &drop,

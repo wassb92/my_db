@@ -27,7 +27,7 @@ OBJ	=	$(SRC:.c=.o)
 NAME	=	my_db
 TEST_NAME	=	unitest
 RM	=	rm -f
-CFLAGS	=	-I./include/ -L.
+CFLAGS	=	-I./include/
 ERROR	=	-std=gnu11 -Wall -Wextra
 DEBUG	=	-g3
 CC	=	gcc

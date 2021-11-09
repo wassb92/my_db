@@ -56,7 +56,7 @@ static void display_field(char const *data, float length)
         index = 1;
 }
 
-bool print_table(list_t **head, db_t **db)
+bool print_table(list_t **head, db_t **db, char **getline)
 {
     const float *size = get_screen_size();
     const float length = size[0];

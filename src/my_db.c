@@ -18,9 +18,7 @@ void do_action(list_t **head, db_t **db, char **getline)
         printf(COMMAND_NOT_FOUND);
         return;
     }
-    if (index == 0)
-        assign_value(db, getline);
-    operation[index](head, db);
+    operation[index](head, db, getline);
 }
 
 bool main_loop(list_t **head, db_t **db)

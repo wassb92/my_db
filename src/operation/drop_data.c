@@ -7,7 +7,7 @@
 
 #include "my_db.h"
 
-bool drop(list_t **head, db_t **db)
+bool drop(list_t **head, db_t **db, char **getline)
 {
     free_list(head);
     return true;

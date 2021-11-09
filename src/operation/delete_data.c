@@ -7,7 +7,7 @@
 
 #include "my_db.h"
 
-bool delete_rows(list_t **head, db_t **db)
+bool delete_rows(list_t **head, db_t **db, char **getline)
 {
     remove_at_position(head, 3);
     return true;
