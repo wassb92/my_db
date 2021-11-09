@@ -29,7 +29,7 @@ bool main_loop(list_t **head, db_t **db)
 
     while (1) {
         getline = my_getline();
-        if (!getline || !*getline || (strcmp(getline[0], "END") == 0) || (strcmp(getline[0], "QUIT") == 0)) {
+        if (!getline || !*getline || (strcasecmp(getline[0], "END") == 0) || (strcasecmp(getline[0], "QUIT") == 0)) {
             free_getline(getline);
             free_list(head);
             break;

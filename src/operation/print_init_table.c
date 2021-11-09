@@ -13,7 +13,7 @@ static void print_field_name(char const *str, float length)
         t = 0;
         return;
     }
-    if (strcmp(str, field_name[0]) == 0)
+    if (strcasecmp(str, field_name[0]) == 0)
         i = 2;
     for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_strlen(str) / 2)) - 1; ++i)
         printf(SPACE);
@@ -32,7 +32,7 @@ static void print_separator(char const *str, float length)
     unsigned short i = 0;
     unsigned short tmp = 0;
 
-    if (strcmp(str, field_name[0]) == 0)
+    if (strcasecmp(str, field_name[0]) == 0)
         i = 2;
     for (; i <= (((int)(TABLE_SIZE_X(length) / NUMBER_FIELD) / 2) - (my_strlen(str) / 2)) - 1; ++i)
         printf(HYPHEN);
@@ -41,9 +41,9 @@ static void print_separator(char const *str, float length)
     tmp = i;
     for (; i > 0; --i)
         printf(HYPHEN);
-    if (strcmp(str, field_name[0]) != 0 && my_strlen(str) % 2 == 0)
+    if (strcasecmp(str, field_name[0]) != 0 && my_strlen(str) % 2 == 0)
         printf(HYPHEN);
-    if (strcmp(str, field_name[NUMBER_FIELD - 1]) != 0)
+    if (strcasecmp(str, field_name[NUMBER_FIELD - 1]) != 0)
         printf(PLUS);
 }
 
