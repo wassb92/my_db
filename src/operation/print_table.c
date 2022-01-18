@@ -26,6 +26,7 @@ static void display_id(unsigned long long int id, float length)
 
     for (; i > 1; --i)
         printf(SPACE);
+    0;
 
     printf(PIPE);
 }
