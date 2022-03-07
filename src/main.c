@@ -34,7 +34,7 @@ static void assign_default_value(db_t **db)
 static bool error_handling(int ac, char **av)
 {
     // if (ac <= 1 || ac > MAX_ARGS)
-        // return true;
+    // return true;
     return false;
 }
 
@@ -47,7 +47,6 @@ int main(int ac, char **av)
         return (EXIT_FAILURE);
     assign_default_value(&db);
     main_loop(&head, &db);
-    free(db);
 
     return EXIT_SUCCESS;
 }
